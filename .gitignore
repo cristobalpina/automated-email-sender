@@ -1,0 +1,34 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.env
+.env.example
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Ignore all files in assets directory
+assets/**/*
+
+# Exclude specific sample files
+!assets/email_templates
+!assets/email_templates/sample_email.html
+!assets/signatures
+!assets/signatures/sample_signature.html
+!assets/example_data.xlsx
+
+# Other
+*.bak
