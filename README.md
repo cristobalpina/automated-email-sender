@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/github/license/cristobalpina/automated-email-sender)](LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
+
 # Automated Email Sender
 
 ## 📨 Description
