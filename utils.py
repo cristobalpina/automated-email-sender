@@ -1,6 +1,6 @@
-import os
 import logging
 import re
+
 
 def validate_email(email: str) -> bool:
     """
@@ -14,6 +14,7 @@ def validate_email(email: str) -> bool:
     """
     email_regex = r"[^@]+@[^@]+\.[^@]+"
     return bool(re.match(email_regex, email))
+
 
 def load_email_template(template_path: str) -> str:
     """
@@ -67,7 +68,10 @@ def append_signature(email_body: str, signature_path: str) -> str:
         logging.debug(f"Email signature loaded from: {signature_path}")
         return email_body + signature
     except FileNotFoundError:
-        logging.error(f"Signature file '{signature_path}' not found. Skipping signature (optional).")
+        logging.error(
+            f"Signature file '{signature_path}' not found. "
+            "Skipping signature (optional)."
+        )
         return email_body  # Skip appending the signature.
     except Exception as e:
         logging.error(f"Error loading signature file from {signature_path}: {e}")

@@ -46,15 +46,28 @@ def send_email(
             server.login(EMAIL, PASSWORD)
             server.sendmail(EMAIL, recipient_email, message.as_string())
 
-        logging.info(f"Email successfully sent to {recipient_name} ({recipient_email}).")
+        logging.info(
+            f"Email successfully sent to {recipient_name} ({recipient_email})."
+        )
 
     except smtplib.SMTPAuthenticationError:
-        logging.error("SMTP Authentication Error: Invalid email or password. Please check your credentials.")
+        logging.error(
+            "SMTP Authentication Error: Invalid email or password. "
+            "Please check your credentials."
+        )
     except smtplib.SMTPConnectError:
-        logging.error("SMTP Connection Error: Unable to connect to the SMTP server. Check your SMTP settings.")
+        logging.error(
+            "SMTP Connection Error: Unable to connect to the SMTP server. "
+            "Check your SMTP settings."
+        )
     except smtplib.SMTPRecipientsRefused:
-        logging.error(f"Recipient refused: The email address {recipient_email} was rejected by the server.")
+        logging.error(
+            f"Recipient refused: The email address {recipient_email} "
+            "was rejected by the server."
+        )
     except smtplib.SMTPException as e:
-        logging.error(f"SMTP error occurred while sending email to {recipient_email}: {e}")
+        logging.error(
+            f"SMTP error occurred while sending email to {recipient_email}: {e}"
+        )
     except Exception as e:
         logging.error(f"Unexpected error while sending email to {recipient_email}: {e}")

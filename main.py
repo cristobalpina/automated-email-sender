@@ -2,7 +2,12 @@ import logging
 import pandas as pd
 from email_sender import send_email
 from typing import Tuple
-from utils import append_signature, load_email_template, fill_email_template, validate_email
+from utils import (
+    append_signature,
+    load_email_template,
+    fill_email_template,
+    validate_email
+)
 from excel_handler import load_excel_data
 from settings import TEMPLATE_PATH, DATA_PATH, EMAIL_SUBJECT, HTML_SIGNATURE_PATH
 
@@ -14,6 +19,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
 
 def process_row(
     index: int,
@@ -31,7 +37,7 @@ def process_row(
         raw_template (str): The raw email template.
         sent_count (int): The number of emails successfully sent.
         skipped_count (int): The number of emails skipped.
-    
+
     Returns:
         Tuple[int, int]: The updated sent and skipped counts
     """
@@ -46,12 +52,18 @@ def process_row(
     recipient_email = row.get("EMAIL")
     recipient_name = row.get("NAME")
     if not recipient_email or not recipient_name:
-        logging.warning(f"Missing email or name for the recipient in row {index + 1}. Row data: {row.to_dict()}")
+        logging.warning(
+            f"Missing email or name for the recipient in row {index + 1}. "
+            f"Row data: {row.to_dict()}"
+        )
         skipped_count += 1
         return sent_count, skipped_count
 
     if not validate_email(recipient_email):
-        logging.warning(f"Invalid email address for {recipient_name} ({recipient_email}). Skipping this recipient.")
+        logging.warning(
+            f"Invalid email address for {recipient_name} ({recipient_email}). "
+            "Skipping this recipient."
+        )
         skipped_count += 1
         return sent_count, skipped_count
 
@@ -85,7 +97,7 @@ def process_row(
     except Exception as e:
         skipped_count += 1
         logging.error(f"Failed to send the email to {recipient_email}. Details: {e}")
-    
+
     return sent_count, skipped_count
 
 
@@ -105,7 +117,7 @@ def main():
         return
 
     logging.info(f"Loaded email template from {TEMPLATE_PATH}.")
-    
+
     # Load the Excel data
     data = load_excel_data(DATA_PATH)
     if data is None or data.empty:
@@ -116,10 +128,13 @@ def main():
 
     # Iterate through each row in the Excel data
     for index, row in data.iterrows():
-        sent_count, skipped_count = process_row(index, row, raw_template, sent_count, skipped_count)
-        
+        sent_count, skipped_count = process_row(
+            index, row, raw_template, sent_count, skipped_count
+        )
+    logging.info(
+        f"Email sending process completed. Sent: {sent_count}, Skipped: {skipped_count}"
+    )
 
-    logging.info(f"Email sending process completed. Sent: {sent_count}, Skipped: {skipped_count}")
 
 if __name__ == "__main__":
     try:
@@ -130,4 +145,3 @@ if __name__ == "__main__":
     except Exception as e:
         logging.info(f"An unexpected error occurred: {e}")
         logging.info("Exiting the program.")
-

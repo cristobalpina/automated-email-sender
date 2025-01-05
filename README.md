@@ -19,15 +19,17 @@ This project is ideal for small businesses, HR teams, or developers looking to s
 ## 📂 Project Structure
 ```
 automated-email-sender/
-├── .gitignore             # Ignore sensitive/unnecessary files
-├── LICENSE                # Open-source license
-├── README.md              # Project documentation
-├── requirements.txt       # Python dependencies
-├── main.py                # Main entry point for the project
-├── email_sender.py        # Functions to send emails
-├── excel_handler.py       # Functions to load and process Excel data
-├── utils.py               # Helper functions for validation and templating
-├── settings.py            # Configuration and environment variables
+├── .gitignore              # Ignore sensitive/unnecessary files
+├── .pre-commit-config.yaml # Pre-commit hook configuration
+├── .flake8                 # Linting configuration
+├── LICENSE                 # Open-source license
+├── README.md               # Project documentation
+├── requirements.txt        # Python dependencies
+├── main.py                 # Main entry point for the project
+├── email_sender.py         # Functions to send emails
+├── excel_handler.py        # Functions to load and process Excel data
+├── utils.py                # Helper functions for validation and templating
+├── settings.py             # Configuration and environment variables
 ├── assets/
 │   ├── email_templates/sample_email.html  # Example HTML email template
 │   ├── signatures/sample_signature.html   # Example HTML email signature
@@ -73,6 +75,17 @@ DATA_PATH=assets/data_example.xlsx
 # Email Subject
 EMAIL_SUBJECT=Your Default Email Subject
 
+```
+Note: Replace your_email@gmail.com and your_app_specific_password with your Gmail credentials. For Gmail, generate an [App Password](https://support.google.com/accounts/answer/185833?hl=en) to ensure security.
+
+### 5. Configure Pre-Commit Hooks (Optional)
+
+This project uses `flake8` for formatting for linting. Pre-commit hooks are included to enforce these standards automatically when committing changes.
+
+To enable pre-commit hooks:
+```bash
+pip install pre-commit
+pre-commit install
 ```
 
 ## 🚀 Usage
