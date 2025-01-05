@@ -94,6 +94,8 @@ python main.py
 - Review email details for each recipient.
 - Confirm whether to send the email.
 
+![Sample Email Screenshot](assets/readme-image.png)
+
 ## 📜 License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 

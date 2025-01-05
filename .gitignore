@@ -29,6 +29,7 @@ assets/**/*
 !assets/signatures
 !assets/signatures/sample_signature.html
 !assets/example_data.xlsx
+!assets/readme-image.png
 
 # Other
 *.bak
