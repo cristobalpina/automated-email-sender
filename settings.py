@@ -1,10 +1,15 @@
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 import os
 import logging
 import sys
 
-# Load environment variables from the .env file
-load_dotenv()
+# Load environment variables from the .env file with override
+dotenv_path = find_dotenv()
+if dotenv_path:
+    print(f"Loading .env file from: {dotenv_path}")
+else:
+    print("No .env file found")
+load_dotenv(dotenv_path, override=True)
 
 # SMTP Configuration
 SMTP_SERVER = os.getenv("SMTP_SERVER")
