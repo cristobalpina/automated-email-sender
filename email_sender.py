@@ -11,7 +11,9 @@ def send_email(
     recipient_email: str,
     recipient_name: str,
     email_body: str,
-    subject: str
+    subject: str,
+    cc_email: str = None,
+    cc_name: str = None,
 ) -> None:
     """
     Sends an email to the specified recipient.
@@ -21,6 +23,9 @@ def send_email(
         recipient_name (str): The recipient's name.
         email_body (str): The HTML content of the email.
         subject (str): The subject of the email.
+        cc_email (str, optional): The email address to be included in CC.
+        Defaults to None.
+        cc_name (str, optional): The name to be included in CC. Defaults to None.
 
     Returns:
         None
@@ -37,6 +42,12 @@ def send_email(
         message["To"] = formataddr((recipient_name, recipient_email))
         message["Subject"] = subject
 
+        # Add CC if provided
+        recipients = [recipient_email]  # Start with the primary recipient
+        if cc_email and cc_name:
+            message["Cc"] = formataddr((cc_name, cc_email))
+            recipients.append(cc_email)  # Add CC to the recipient list
+
         # Attach the email body
         message.attach(MIMEText(email_body, "html"))
 
@@ -44,7 +55,7 @@ def send_email(
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
             server.starttls()  # Secure the connection
             server.login(EMAIL, PASSWORD)
-            server.sendmail(EMAIL, recipient_email, message.as_string())
+            server.sendmail(EMAIL, recipients, message.as_string())
 
         logging.info(
             f"Email successfully sent to {recipient_name} ({recipient_email})."

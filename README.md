@@ -75,6 +75,9 @@ DATA_PATH=assets/data_example.xlsx
 
 # Email Subject
 EMAIL_SUBJECT=Your Default Email Subject
+# Optional CC Email
+CC_EMAIL=another_email@gmail.com
+CC_NAME=Another Name
 
 ```
 Note: Replace your_email@gmail.com and your_app_specific_password with your Gmail credentials. For Gmail, generate an [App Password](https://support.google.com/accounts/answer/185833?hl=en) to ensure security.

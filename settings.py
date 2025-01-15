@@ -17,6 +17,8 @@ SMTP_PORT = os.getenv("SMTP_PORT")
 EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("PASSWORD")
 SENDER_NAME = os.getenv("SENDER_NAME")
+CC_EMAIL = os.getenv("CC_EMAIL")
+CC_NAME = os.getenv("CC_NAME")
 
 # File paths and other settings
 HTML_SIGNATURE_PATH = os.getenv(

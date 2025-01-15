@@ -9,7 +9,14 @@ from utils import (
     validate_email
 )
 from excel_handler import load_excel_data
-from settings import TEMPLATE_PATH, DATA_PATH, EMAIL_SUBJECT, HTML_SIGNATURE_PATH
+from settings import (
+    TEMPLATE_PATH,
+    DATA_PATH,
+    EMAIL_SUBJECT,
+    HTML_SIGNATURE_PATH,
+    CC_EMAIL,
+    CC_NAME
+)
 
 # Configure logging
 logging.basicConfig(
@@ -91,7 +98,9 @@ def process_row(
             recipient_email=recipient_email,
             recipient_name=recipient_name,
             email_body=email_body,
-            subject=EMAIL_SUBJECT
+            subject=EMAIL_SUBJECT,
+            cc_email=CC_EMAIL if CC_EMAIL else None,
+            cc_name=CC_NAME if CC_NAME else None
         )
         sent_count += 1
     except Exception as e:
